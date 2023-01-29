@@ -1,0 +1,2 @@
+# SmartEditor
+heh, my thesis
