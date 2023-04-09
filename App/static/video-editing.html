@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/scripts.js" defer></script>
+    <title>AI Video Editing - Edit</title>
+</head>
+<body>
+    <header>
+        <h1>Edit Your Video</h1>
+    </header>
+    <main>
+        <aside>
+            <ul id="editing-options">
+                <li>
+                    <button class="menu-item">Trim</button>
+                    <div class="submenu" hidden>
+                        <label><input type="checkbox" class="trim-option"> Trim start</label><br>
+                        <label><input type="checkbox" class="trim-option"> Trim end</label>
+                    </div>
+                </li>
+                <li>
+                    <button class="menu-item">Add Text</button>
+                    <div class="submenu" hidden>
+                        <label><input type="checkbox" class="text-option"> Add title</label><br>
+                        <label><input type="checkbox" class="text-option"> Add subtitles</label>
+                    </div>
+                </li>
+                <li>
+                    <button class="menu-item">Apply Filters</button>
+                    <div class="submenu" hidden>
+                        <label><input type="checkbox" class="filter-option"> Black and white</label><br>
+                        <label><input type="checkbox" class="filter-option"> Sepia</label>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+        <section>
+            <input type="file" id="video-input" accept="video/*">
+            <video id="video-preview" controls></video>
+            <button id="apply-changes">Apply Changes</button>
+        </section>
+    </main>
+</body>
+</html>
