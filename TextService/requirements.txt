@@ -1,3 +1,10 @@
-requests==2.28.1
-fastapi==0.92.0
-uvicorn==0.20.0
+requests==2.28.2
+fastapi==0.95.0
+uvicorn==0.21.1
+openai==0.27.4
+googletrans-py==4.0.0
+openai-whisper==20230314
+git+https://github.com/linto-ai/whisper-timestamped
+# torch==2.0.0
+# torchvision==0.15.1
+# --index-url https://download.pytorch.org/whl/cu118

@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request, File, UploadFile, Form
-from pydantic import BaseModel
 import requests
 import threading
 import logging as log
@@ -9,21 +8,14 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 
+from config import *
+from models import *
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
-# logger = logging.getLogger(__name__)
 log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level='INFO')
 
 templates = Jinja2Templates(directory="templates")
-
-
-class VideoOptions(BaseModel):
-    trim_start: bool
-    trim_end: bool
-    add_title: bool
-    add_subtitles: bool
-    black_and_white: bool
-    sepia: bool
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -57,8 +49,11 @@ async def apply_changes(
     with open(f"uploaded_videos/{video.filename}", "wb") as f:
         f.write(await video.read())
 
-    # Process the video with the given options
-    # ...
+    log.info('Sending request to Video Service')
+    requests.post(f'{VIDEO_SERVICE_ADDRESS}:{VIDEO_SERVICE_PORT}/process', json=options.dict())
+
+    log.info('Sending request to Text Service')
+    requests.post(f'{TEXT_SERVICE_ADDRESS}:{TEXT_SERVICE_PORT}/process', json=options.dict())
 
     return {"status": "success"}
 
