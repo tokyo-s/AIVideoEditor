@@ -1,3 +1,0 @@
-OPEN_API_KEY = ''
-MODEL_WHISPER_SIZE = 'small'
-DEVICE = 'cuda'
