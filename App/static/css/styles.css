@@ -21,24 +21,19 @@ header button {
     padding: 0.5rem 1rem;
 }
 
-section {
-    margin: 2rem;
-    text-align: center;
-}
-
-.partners {
-    display: flex;
-    justify-content: center;
-}
-
 main {
     display: flex;
-    justify-content: space-around;
     margin: 2rem;
 }
 
 aside {
-    width: 30%;
+    background-color: #4CAF50;
+    flex: 0 0 25%; /* Change the width */
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    padding: 1rem;
+    position: sticky;
+    top: 2rem;
 }
 
 .menu-item {
@@ -49,16 +44,28 @@ aside {
     display: block;
     font-size: 1rem;
     margin-bottom: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     text-align: left;
-    width: 100%;
+    width: 60px; /* Change the width */
+    height: 60px; /* Change the height */
 }
 
 .submenu {
     background-color: #f1f1f1;
     border-left: 3px solid #4CAF50;
+    height: calc(100vh - 4rem);
     margin-bottom: 0.5rem;
     padding: 0.5rem;
+    position: absolute;
+    left: 150px; /* Change the left position */
+    top: 0;
+    width: calc(100% - 150px); /* Change the width */
+}
+
+section {
+    flex: 1;
+    margin-left: 2rem;
+    text-align: center;
 }
 
 #video-input {

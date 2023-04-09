@@ -14,19 +14,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     menuItems.forEach((menuItem) => {
         menuItem.addEventListener('click', (event) => {
-            const submenu = event.target.nextElementSibling;
-            submenu.hidden = !submenu.hidden;
+            const clickedSubmenu = event.target.nextElementSibling;
+            clickedSubmenu.hidden = !clickedSubmenu.hidden;
+
+            // Collapse other submenus
+            menuItems.forEach((otherMenuItem) => {
+                if (otherMenuItem !== event.target) {
+                    const otherSubmenu = otherMenuItem.nextElementSibling;
+                    otherSubmenu.hidden = true;
+                }
+            });
         });
     });
 
-    applyChangesButton.addEventListener('click', () => {
-        const trimOptions = document.querySelectorAll('.trim-option:checked');
-        const textOptions = document.querySelectorAll('.text-option:checked');
-        const filterOptions = document.querySelectorAll('.filter-option:checked');
+  applyChangesButton.addEventListener("click", async () => {
+    if (!videoInput.files[0]) {
+      alert("Please upload a video file.");
+      return;
+    }
 
-        // Collect the selected options and send a request with the information
-        console.log('Selected trim options:', trimOptions);
-        console.log('Selected text options:', textOptions);
-        console.log('Selected filter options:', filterOptions);
-    });
+    const trimOptions = document.querySelectorAll(".trim-option");
+    const textOptions = document.querySelectorAll(".text-option");
+    const filterOptions = document.querySelectorAll(".filter-option");
+
+    const formData = new FormData();
+    formData.append("video", videoInput.files[0]);
+    formData.append("trim_start", trimOptions[0].checked);
+    formData.append("trim_end", trimOptions[1].checked);
+    formData.append("add_title", textOptions[0].checked);
+    formData.append("add_subtitles", textOptions[1].checked);
+    formData.append("black_and_white", filterOptions[0].checked);
+    formData.append("sepia", filterOptions[1].checked);
+
+    try {
+      const response = await fetch("/apply-changes", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
 });
