@@ -7,7 +7,7 @@ os.environ['OPENAI_API_KEY'] = config.OPEN_API_KEY
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def test_question(prompt, question = '\n\n write this text as a newsletter'):
+def summarize(prompt, question = '\n\n write this text as a newsletter'):
     response = openai.Completion.create(
   model="text-davinci-003",
   prompt= prompt+question,   #Tl;dr

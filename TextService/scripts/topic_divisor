@@ -6,7 +6,7 @@ os.environ['OPENAI_API_KEY'] = config.OPEN_API_KEY
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def test_question(prompt, question = '\n\n divide this text into topics and show me the end margin for each topic in a key value dictionary'
+def divide_topics(prompt, question = '\n\n divide this text into topics and show me the end margin for each topic in a key value dictionary'
 ):
     response = openai.Completion.create(
   model="text-davinci-003",

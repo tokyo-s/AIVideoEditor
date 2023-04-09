@@ -3,7 +3,7 @@ import config
 
 model = whisper.load_model(config.MODEL_WHISPER_SIZE, device="cpu")
 
-def audio_to_text(audio):
+def transcribe(audio):
     audio = whisper.load_audio(audio)
     audio = whisper.pad_or_trim(audio)
     mel = whisper.log_mel_spectrogram(audio).to(model.device)

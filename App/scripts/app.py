@@ -38,6 +38,7 @@ async def apply_changes(
     sepia: bool = Form(False),
 ):
     options = VideoOptions(
+        filename=f"files/{video.filename}",
         trim_start=trim_start,
         trim_end=trim_end,
         add_title=add_title,
@@ -46,15 +47,15 @@ async def apply_changes(
         sepia=sepia,
     )
     # Save the video file
-    with open(f"uploaded_videos/{video.filename}", "wb") as f:
+    with open(f"files/{video.filename}", "wb") as f:
         f.write(await video.read())
 
     log.info('Sending request to Video Service')
     requests.post(f'{VIDEO_SERVICE_ADDRESS}:{VIDEO_SERVICE_PORT}/process', json=options.dict())
 
     log.info('Sending request to Text Service')
-    requests.post(f'{TEXT_SERVICE_ADDRESS}:{TEXT_SERVICE_PORT}/process', json=options.dict())
-
+    result = requests.post(f'{TEXT_SERVICE_ADDRESS}:{TEXT_SERVICE_PORT}/process', json=options.dict())
+    log.info(result.dict())
     return {"status": "success"}
 
 
