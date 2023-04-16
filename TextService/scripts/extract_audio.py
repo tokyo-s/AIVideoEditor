@@ -6,4 +6,6 @@ def extract_audio(filename):
     # Extract audio from video
     audio = video.audio
     # Save audio file
-    audio.write_audiofile(f"{filename}.mp3")
+    new_file_name = f"{filename[:-4].replace(' (online-video-cutter.com)','')}.mp3"
+    audio.write_audiofile(new_file_name)
+    return new_file_name

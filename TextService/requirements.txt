@@ -1,10 +1,13 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
 requests==2.28.2
-fastapi==0.95.0
-uvicorn==0.21.1
+Flask==2.2.3
+Flask-CORS==3.0.10
 openai==0.27.4
 googletrans-py==4.0.0
 openai-whisper==20230314
+numpy==1.23.5
 git+https://github.com/linto-ai/whisper-timestamped
-# torch==2.0.0
+torch==2.0.0 
+moviepy==1.0.3
+python-multipart
 # torchvision==0.15.1
-# --index-url https://download.pytorch.org/whl/cu118

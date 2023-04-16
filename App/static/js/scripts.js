@@ -45,9 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append("add_subtitles", textOptions[1].checked);
     formData.append("black_and_white", filterOptions[0].checked);
     formData.append("sepia", filterOptions[1].checked);
-
+    
     try {
-      const response = await fetch("/apply-changes", {
+      const response = await fetch("http://localhost:8001/process", {
         method: "POST",
         body: formData,
       });
@@ -62,4 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error("Error:", error);
     }
   });
+});
+
+document.getElementById("toggle-result").addEventListener("click", () => {
+  const resultMessage = document.getElementById("result-message");
+  resultMessage.hidden = !resultMessage.hidden;
 });

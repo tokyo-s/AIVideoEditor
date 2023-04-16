@@ -10,7 +10,7 @@
     <header>
         <h1>Welcome to AI Video Editing</h1>
         <p>Edit your videos with the power of AI</p>
-        <button onclick="location.href='/static/video-editing.html'">Start</button>
+        <button onclick="goVideoEditing()" ">Start</button>
     </header>
     <section>
         <h2>How it works</h2>
@@ -23,4 +23,9 @@
         </div>
     </section>
 </body>
+<script>
+    function goVideoEditing() {
+        window.location.href ='{{url_for("video_editing")}}' 
+    }
+</script>
 </html>

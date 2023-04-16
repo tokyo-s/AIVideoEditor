@@ -1,6 +1,7 @@
 **/__pycache__/
 **/.vscode/
 **/.idea/
+**/.env/
 **/venv/
 **/files/
 **/config.py

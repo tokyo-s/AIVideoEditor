@@ -14,9 +14,9 @@ app = FastAPI()
 log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level='INFO')
 
 @app.post("/process")
-async def apply_changes(options: VideoOptions):
-    extract_audio(options.filename)
-    video_text = transcribe(options.filename[:-4] + ".mp3")
+async def apply_changes(video: UploadFile = File(...)):
+    new_file_name = extract_audio(options.filename)
+    detected_language, video_text = transcribe(new_file_name)
     result = summarize(video_text)
     log.info("Processing request with following options: {}".format(options.dict()))
     return {"status": "success", "result":result}

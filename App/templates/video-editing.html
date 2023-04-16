@@ -17,22 +17,22 @@
                 <li>
                     <button class="menu-item">Trim</button>
                     <div class="submenu" hidden>
-                        <label><input type="checkbox" class="trim-option"> Trim start</label><br>
-                        <label><input type="checkbox" class="trim-option"> Trim end</label>
+                        <label><input type="checkbox" class="trim-option box" name="trim_start"> Trim start</label><br>
+                        <label><input type="checkbox" class="trim-option box" name="trim_end"> Trim end</label>
                     </div>
                 </li>
                 <li>
                     <button class="menu-item">Add Text</button>
                     <div class="submenu" hidden>
-                        <label><input type="checkbox" class="text-option"> Add title</label><br>
-                        <label><input type="checkbox" class="text-option"> Add subtitles</label>
+                        <label><input type="checkbox" class="text-option box" name="add_title"> Add title</label><br>
+                        <label><input type="checkbox" class="text-option box" name="add_subtitles"> Add subtitles</label>
                     </div>
                 </li>
                 <li>
                     <button class="menu-item">Apply Filters</button>
                     <div class="submenu" hidden>
-                        <label><input type="checkbox" class="filter-option"> Black and white</label><br>
-                        <label><input type="checkbox" class="filter-option"> Sepia</label>
+                        <label><input type="checkbox" class="filter-option box" name="black_and_white"> Black and white</label><br>
+                        <label><input type="checkbox" class="filter-option box" name="sepia"> Sepia</label>
                     </div>
                 </li>
             </ul>
@@ -40,7 +40,14 @@
         <section>
             <input type="file" id="video-input" accept="video/*">
             <video id="video-preview" controls></video>
-            <button id="apply-changes">Apply Changes</button>
+            <button  type="submit" id="apply-changes">Apply Changes</button>
+        </section>
+        <section>
+            <h2>Result</h2>
+            <button id="toggle-result">Toggle Result</button>
+            <div id="result-message" hidden>
+                <p id="result-text"></p>
+            </div>
         </section>
     </main>
 </body>

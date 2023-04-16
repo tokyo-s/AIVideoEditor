@@ -1,7 +1,7 @@
 import whisper
 import config
 
-model = whisper.load_model(config.MODEL_WHISPER_SIZE, device="cpu")
+model = whisper.load_model(config.MODEL_WHISPER_SIZE, device=config.DEVICE)
 
 def transcribe(audio):
     audio = whisper.load_audio(audio)
