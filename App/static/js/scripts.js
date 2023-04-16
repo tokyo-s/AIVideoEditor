@@ -33,6 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    function updatePageWithResults(result) {
+      const resultMessage = document.getElementById('result-text');
+      resultMessage.textContent = `Result: ${JSON.stringify(result['result'])}`;
+      resultMessage.hidden = false;
+  }
+
     const trimOptions = document.querySelectorAll(".trim-option");
     const textOptions = document.querySelectorAll(".text-option");
     const filterOptions = document.querySelectorAll(".filter-option");
@@ -55,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
+        updatePageWithResults(result);
       } else {
         console.error("Error:", response.statusText);
       }

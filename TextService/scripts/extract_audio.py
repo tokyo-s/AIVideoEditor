@@ -1,7 +1,10 @@
 from moviepy.editor import *
+import logging as log
+log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level='INFO')
 
 # Load video file
 def extract_audio(filename):
+    log.info("Extracting audio from video file: {}".format(filename))
     video = VideoFileClip(filename)
     # Extract audio from video
     audio = video.audio
