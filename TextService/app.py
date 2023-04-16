@@ -4,11 +4,11 @@ import requests
 import threading
 import logging as log
 import os
-from summarizer import summarize
-from transcriber import transcribe
-from extract_audio import extract_audio
+from scripts.summarizer import summarize
+from scripts.transcriber import transcribe
+from scripts.extract_audio import extract_audio
 from config import *
-from models import *
+from scripts.models import *
 
 app = Flask(__name__)
 CORS(app)
