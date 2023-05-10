@@ -7,6 +7,7 @@ import logging as log
 
 from config import *
 from scripts.models import *
+from scripts.env_vars import *
 
 app = Flask(__name__)
 CORS(app)
@@ -33,4 +34,5 @@ def apply():
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=8000)
+    env_vars = EnvironmentVariables()
+    app.run(host=env_vars[APP_SERVICE_ADDRESS], port=env_vars[APP_SERVICE_PORT], debug=True)

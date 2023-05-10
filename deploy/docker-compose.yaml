@@ -1,0 +1,94 @@
+version: "3.9"
+
+services:
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data"
+
+  app:
+    build: ../App
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../App/.env
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+
+  aiprocess:
+    build: ../AIProcess
+    ports:
+      - "8001:8001"
+    depends_on:
+      - service-discovery
+      - worker1
+      - worker2
+    env_file:
+      - ../AIProcess/.env
+    # environment:
+    #   - FLASK_APP=app.py
+    #   - FLASK_RUN_HOST=0.0.0.0
+
+  service-discovery:
+    build: ../ServiceDiscovery
+    ports:
+      - "8002:8002"
+    env_file:
+      - ../ServiceDiscovery/.env
+    # environment:
+    #   - FLASK_APP=app.py
+    #   - FLASK_RUN_HOST=0.0.0.0
+
+  worker1:
+    build: ../Worker
+    ports:
+      - "8003:8003"
+    env_file:
+      - ../Worker/.env
+    depends_on:
+      - service-discovery
+    environment:
+        - WORKER_NAME=worker1
+        - WORKER_PORT=8003
+    #   - FLASK_APP=app.py
+    #   - FLASK_RUN_HOST=0.0.0.0
+
+  worker2:
+    build: ../Worker
+    ports:
+      - "8004:8004"
+    env_file:
+      - ../Worker/.env
+    depends_on:
+      - service-discovery
+    environment:
+        - WORKER_NAME=worker2
+        - WORKER_PORT=8004
+    #   - FLASK_APP=app.py
+    #   - FLASK_RUN_HOST=0.0.0.0
+
+  # worker3:
+  #   build: ../Worker
+  #   ports:
+  #     - "8005:8005"
+      # env_file:
+      # - ../Worker/.env
+      # depends_on:
+      # - service-discovery
+  #   environment:
+  #     - FLASK_APP=app.py
+  #     - FLASK_RUN_HOST=0.0.0.0
+
+volumes:
+  portainer_data:
+
+networks:
+  smarteditor:
+    driver: bridge

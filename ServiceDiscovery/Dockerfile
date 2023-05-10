@@ -8,7 +8,7 @@ COPY ./requirements.txt ./requirements.txt
 COPY ./scripts ./scripts
 
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
-# EXPOSE 8003
+EXPOSE 8002
 
 COPY . .
 CMD [ "python", "./app.py"]

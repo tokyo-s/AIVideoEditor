@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append("sepia", filterOptions[1].checked);
     
     try {
-      const response = await fetch("http://localhost:8001/process", {
+      const response = await fetch("http://localhost:8001/request", {
         method: "POST",
         body: formData,
       });

@@ -1,16 +1,14 @@
-FROM python:3.10
-#
-WORKDIR /app
+FROM python:3.8
 
-#
+WORKDIR /
+# ENV FLASK_APP=app.py
+# ENV FLASK_RUN_HOST=0.0.0.0
+
 COPY ./requirements.txt ./requirements.txt
+COPY ./scripts ./scripts
 
-#
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
-
-#
-COPY . .
-
 EXPOSE 8000
-#
-CMD [ "python3", "scripts/app.py"]
+
+COPY . .
+CMD [ "python", "./app.py"]

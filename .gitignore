@@ -5,4 +5,9 @@
 **/venv/
 **/files/
 **/config.py
+**/.env
+
+*.ppt
+*.docx
+*drawio
 tests
