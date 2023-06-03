@@ -8,36 +8,6 @@
     <title>AI Video Editing</title>
     <style>
 
-        body {
-            font-family: 'ClashDisplay-Variable', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: hsla(232, 73%, 65%, 1);
-            background: linear-gradient(90deg, #6576e7 0%, #8752a3 100%);
-            background: -moz-linear-gradient(90deg, hsla(232, 73%, 65%, 1) 0%, hsla(279, 33%, 48%, 1) 100%);
-
-            background: -webkit-linear-gradient(90deg, hsla(232, 73%, 65%, 1) 0%, hsla(279, 33%, 48%, 1) 100%);
-
-            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#6274E7", endColorstr="#8752A3", GradientType=1 );
-        }
-
-        header {
-
-            background-color: #02182b;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: relative;
-            /* overflow: hidden; */
-            margin-bottom: -1px; 
-            margin: 0;
-        }
-
-        svg {
-            display: block; /* To remove the gap between SVG and the main body */
-            margin-top: -120px;
-        }
-
         header::before {
             content: "";
             position: absolute;
@@ -73,9 +43,6 @@
         }
 
         section {
-            /* background-color: rgba(255, 255, 255, 0.9); */
-            /* border-radius: 5px; */
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
             margin: 1rem;
             padding: 1rem;
             text-align: center;
@@ -84,9 +51,12 @@
         section h1{
             margin-top: 0;
         }
+
         video{
-            /* background-color: rgba(255, 255, 255, 0.9);  */
             border-radius: 5px;
+            width: 70%;
+            height: auto;
+            border-radius: 40px;
         }
 
         h1 {
@@ -107,62 +77,37 @@
         .partner-logo {
             width: 150px;
             height: 100px;
-            /* background-color: #f1f1f1; */
             margin: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 5px;
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
         }
 
         .partner-logo img {
             max-width: 100%;
             max-height: 100%;
         }
-        video{
-            width: 70%;
-            height: auto;
-            border-radius: 40px;
-        }
 
         #sparkle-header{
             font-size: 5rem;
             margin-top: 0;
         } 
-/* 
-        #sparkle-header{
-            margin-top: 0;
-            margin: auto;
-            float: left;
-        } */
-
         #sparkle {
-            width: 40px; /* Adjust the width as needed */
-            height: auto; /* Maintain the aspect ratio */
-            display: inline-block; /* Center the image */
-            /* margin-left: auto; */
-            /* margin-right: auto; */
-            margin-bottom: 0rem; /* Add some space below the image */
+            width: 40px; 
+            height: auto; 
+            display: inline-block; 
+            margin-bottom: 0rem; 
         }
 
         #sparkles {
-                        /* margin-bottom: -3rem; */
-
-            width: 50px; /* Adjust the width as needed */
-            height: auto; /* Maintain the aspect ratio */
-            display: inline-block; /* Center the image */
-            /* margin-left: auto; */
-            /* margin-right: auto; */
+            width: 50px; 
+            height: auto;
+            display: inline-block;
             margin-top: -5rem;
         }
 
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: nowrap;
-        }
+
 
         .header-content img {
             margin: 0 1rem;
@@ -172,76 +117,13 @@
         .header-content h1 {
             display: inline;
             width: 600px;
-            /* margin-bottom: -3rem; */
-            /*text-align: center;
-            margin: auto; */
         }
         .header-content button{
             margin: 0 1rem;
         }
-        nav {
-            background-color: #02182b;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 1.5rem;
-        }
-
-        nav .logo {
-            width: 100px; /* Make the logo smaller */
-            height: auto;
-            margin-right: 1rem; /* Add space between the logo and the buttons */
-            margin-left: 2rem;
-        }
-
-        nav .menu {
-            display: flex;
-            align-items: center;
-        }
-
-        nav .menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        nav .menu a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        nav .auth-buttons {
-            display: flex;
-            align-items: center;
-            margin-right: 1rem;
-            margin-left: auto;
-        }
-
-        nav .auth-buttons a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin-left: 1rem;
-            padding: 0.5rem 1rem;
-            transition: background-color 0.3s;
-        }
-
-        nav .auth-buttons .sign-up {
-            background-color: #ffffff;
-            color: #02182b;
-            border-radius: 50px; /* Create an ellipse background */
-        }
-
-        nav .auth-buttons .sign-up:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
 
         nav .menu #home {
-            color: #A365E3; /* Set the link text color */
-            /* ... */
+            color: #A365E3; 
         }
 
         #footer{

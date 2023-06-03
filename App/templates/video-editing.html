@@ -11,13 +11,10 @@
          .video-container {
             position: relative;
             width: 100%;
-            /* max-width: 640px; */
             height: 0;
             padding-bottom: 56.25%; /* 16:9 aspect ratio */
             margin-bottom: 1rem;
-            /* background-color: #f1f1f1; */
             border-radius: 10px;
-            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -35,36 +32,6 @@
             object-fit: cover;
             border-radius: 40px;
         }
-        body {
-            font-family: 'ClashDisplay-Variable', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: hsla(232, 73%, 65%, 1);
-            background: linear-gradient(90deg, #6576e7 0%, #8752a3 100%);
-            background: -moz-linear-gradient(90deg, hsla(232, 73%, 65%, 1) 0%, hsla(279, 33%, 48%, 1) 100%);
-
-            background: -webkit-linear-gradient(90deg, hsla(232, 73%, 65%, 1) 0%, hsla(279, 33%, 48%, 1) 100%);
-
-            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#6274E7", endColorstr="#8752A3", GradientType=1 );
-        }
-
-
-
-
-        header {
-            position: relative;
-
-            background-color: #02182B;
-            /* border-radius: 5px; */
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
-            color: #dce0d9;
-            /* padding: 1rem; */
-            text-align: center;
-            margin: 0;
-            margin-bottom: 0;
-
-        }
-
 
         main {
             margin-top: 0;
@@ -74,9 +41,7 @@
         }
 
         aside {
-            /* background-color: rgba(255, 255, 255, 0.9); */
             border-radius: 5px;
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
             flex: 0 0 30%;
             height: calc(100vh - 4rem);
             overflow-y: auto;
@@ -90,7 +55,6 @@
             z-index: 100000;
             font-family: "ClashDisplay-Variable-small";
             background-color: white;
-            /* border: none; */
             border-radius: 15px;
             color: #6b6fd9;
             cursor: pointer;
@@ -131,9 +95,7 @@
     }
 
         section {
-            /* background-color: rgba(255, 255, 255, 0.9); */
             border-radius: 5px;
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
             flex: 1;
             margin-left: 2rem;
             padding: 2rem;
@@ -239,15 +201,10 @@
 
 
         #sparkles {
-            /* left: 85%; */
-            /* position: absolute; */
-            width: 100px; /* Adjust the width as needed */
-            height: auto; /* Maintain the aspect ratio */
-            display: inline-block; /* Center the image */
-            /* margin: 0 1rem; */
-            /* margin-left: auto; */
-            /* margin-right: auto; */
-            margin-bottom: 0rem; /* Add some space below the image */
+            width: 100px;
+            height: auto; 
+            display: inline-block; 
+            margin-bottom: 0rem; 
         }
 
         #cast {
@@ -257,42 +214,24 @@
             top: 20%;
             left: 15%;
             z-index: 110000;
-            /* left: 85%; */
-            /* position: absolute; */
-            height: auto; /* Maintain the aspect ratio */
-            display: inline-block; /* Center the image */
-            /* margin: 0 1rem; */
-            /* margin-left: auto; */
-            /* margin-right: auto; */
-            margin-bottom: 0rem; /* Add some space below the image */
+            height: auto;  
+            display: inline-block; 
+            margin-bottom: 0rem;  
         }
         #cut {
-            /* left: 85%; */
-            /* position: absolute; */
-            width: 100px; /* Adjust the width as needed */
-            height: auto; /* Maintain the aspect ratio */
-            display: inline-block; /* Center the image */
-            /* margin: 0 1rem; */
-            /* margin-left: auto; */
-            /* margin-right: auto; */
-            margin-bottom: 0rem; /* Add some space below the image */
+
+            width: 100px; 
+            height: auto; 
+            display: inline-block; 
+            margin-bottom: 0rem;  
         }
 
         #sparkle-header{
             font-size: 7rem;
-            /* margin-top: 0; */
         } 
 
         .header-content {
-            /* position: absolute; */
-            /* top: 10%; */
-            /* left: 35%; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: nowrap;
             margin-left: 13rem;
-
         }
 
         .header-content h1 {
@@ -301,93 +240,11 @@
             width: 600px;
             font-size: 2.5rem;
             margin-bottom: 0rem;
-            /* margin: auto */
-            /*text-align: center;
-            margin: auto; */
-        }
-
-
-        /* header h1 {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            margin: 0;
-            color: #fff;
-            z-index: 1;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        } */
-
-        nav {
-            background-color: #02182b;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 1.5rem;
-        }
-
-        nav .logo {
-            width: 100px; /* Make the logo smaller */
-            height: auto;
-            margin-right: 1rem; /* Add space between the logo and the buttons */
-            margin-left: 2rem;
-        }
-
-        nav .menu {
-            display: flex;
-            align-items: center;
-        }
-
-        nav .menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        nav .menu a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        nav .auth-buttons {
-            display: flex;
-            align-items: center;
-            margin-right: 1rem;
-            margin-left: auto;
-        }
-
-        nav .auth-buttons a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin-left: 1rem;
-            padding: 0.5rem 1rem;
-            transition: background-color 0.3s;
-        }
-
-        nav .auth-buttons .sign-up {
-            background-color: #ffffff;
-            color: #02182b;
-            border-radius: 50px; /* Create an ellipse background */
-        }
-
-        nav .auth-buttons .sign-up:hover {
-            background-color: rgba(255, 255, 255, 0.8);
         }
 
         nav .menu #edit {
             color: #A365E3; /* Set the link text color */
             /* ... */
-        }
-
-
-        svg {
-            display: block; /* To remove the gap between SVG and the main body */
-            margin-top: -120px;
         }
 
         .rotate90 {
@@ -398,9 +255,6 @@
             transform: rotate(-15deg);
         }
 
-        .box{
-            z-index: 19999;
-        }
     </style>
 </head>
 <body>
