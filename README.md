@@ -1,6 +1,22 @@
 # AIVideoEditor
-heh, my thesis
-lol
+heh, my Thesis
+
+This is a project for my thesis about automating the process of video editing
+The video editing app is a web application that will allow users to select with checkboxes any preprocessing steps the user wants, examples of options are:
+
+* Auto subtitles
+* Text translation
+* Newsletter creation from video content
+* Topics division 
+* Audio cleaning
+* Video trimming
+* Logo blurring 
+* Faces blurring
+* Licence plates blurring, 
+* Quality enhancement, 
+* Auto AI Thumbnail creation
+
+# Installation Steps:
 
 ## Install ImageMagick 
 
@@ -11,8 +27,8 @@ lol
 3. Replace the path with the correct path to your `magick.exe` file inside the `config.py`.
 
 
-### Create a OpenAI Account and create a new API key
+### Create a OpenAI Account on https://platform.openai.com and create a new API key
 ### create a config.py file in your folder and place the following line there:
-```
+```python
 api_key = 'your_api_key'
 ```

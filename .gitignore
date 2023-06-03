@@ -11,3 +11,4 @@
 *.docx
 *drawio
 tests
+.history
