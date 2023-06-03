@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, render_template
+from flask import Flask, request, url_for, jsonify
 from flask_cors import CORS
 import requests
 import json
@@ -9,6 +9,7 @@ from scripts.worker import Worker
 from scripts.env_vars import *
 
 env_vars = None
+worker = None
 
 app = Flask(__name__)
 CORS(app)
@@ -32,16 +33,28 @@ def register_worker():
     log.info(f'Discovery Service: {response["message"]}')
     return
 
+@app.route("/health-check", methods=['GET'])
+def health_check():
+    global worker, env_vars
+
+    log.info(f"Checking health of {env_vars[WORKER_NAME]}")
+    if worker is None or worker.busy==False:
+        return jsonify({"status": "success", "status": "Free"}, 200)
+    elif worker.busy:
+        return jsonify({"status": "success", "status": "Busy"}, 200)
+
 @app.route("/process", methods=['POST'])
 def apply_changes():
-    global env_vars
+    global env_vars, worker
 
     args = request.args
     log.info("Processing request with following options: {}".format(args))
     worker = Worker(env_vars[WORKER_NAME], args)
     result = worker.work()
-    return {"status": "success", "result":result}
+    log.info("Processing request finished")
+    final_video_path = args['filename_video'].replace('.mp4', '_result.mp4').replace('files','static')
+    return {"status": "success", "result":result.__dict__, 'video_url': final_video_path}
 
 if __name__ == '__main__':
     register_worker()
-    app.run(host=env_vars[WORKER_ADDRESS], port=env_vars[WORKER_PORT], debug=True, use_reloader=False)
+    app.run(host=env_vars[WORKER_ADDRESS], port=env_vars[WORKER_PORT], debug=True, use_reloader=False) #

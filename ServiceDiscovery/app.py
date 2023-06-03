@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import logging as log
-
+import requests
 from scripts.env_vars import *
 
 app = Flask(__name__)
@@ -24,7 +24,16 @@ def discover_service():
     
 @app.route('/get_workers', methods=['GET'])
 def discover_worker():
-    return jsonify({"workers": services})
+    free_workers = services.copy()
+    for worker in services:
+        response = requests.get(services[worker] + "/health-check")
+        if response.status_code != 200:
+            del services[worker]
+            del free_workers[worker]
+        elif response.json()[0]["status"] != "Free":
+            del free_workers[worker]
+        
+    return jsonify({"workers": free_workers})
     
 @app.route('/register', methods=['POST'])
 def register_service():
@@ -43,4 +52,4 @@ def register_service():
 
 if __name__ == '__main__':
     env_vars = EnvironmentVariables()
-    app.run(debug=True, host=env_vars[DISCOVERY_SERVICE_ADDRESS], port=env_vars[DISCOVERY_SERVICE_PORT])
+    app.run(debug=True, host=env_vars[DISCOVERY_SERVICE_ADDRESS], port=env_vars[DISCOVERY_SERVICE_PORT], use_reloader=False)

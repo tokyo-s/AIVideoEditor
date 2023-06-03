@@ -14,6 +14,6 @@ def transcribe(audio):
     _, probs = model.detect_language(mel)
 
     detected_language = max(probs, key=probs.get)
-    result = model.transcribe(audio)
+    result = model.transcribe(audio, word_timestamps=True)
     text = result["text"]
     return detected_language, text

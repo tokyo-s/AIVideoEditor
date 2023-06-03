@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 
-class VideoOptions(BaseModel):
-    trim_start: bool
-    trim_end: bool
-    add_title: bool
-    add_subtitles: bool
-    black_and_white: bool
-    sepia: bool
+class ProcessingResult(BaseModel):
+    detected_language: str = None
+    text: str = None
+    final_video_path: str = None
+    summarized_text: str = None
+    face_blurred: bool = None
+    license_plate_blurred: bool = None
+    trimmed: bool = None

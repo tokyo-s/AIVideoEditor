@@ -1,7 +1,12 @@
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 
-translator = Translator()
+def translate(text, target='en'):
+    translator = GoogleTranslator(source='auto', target=target)
+    translated = translator.translate(text) 
+    return translated
 
-def translate(text, dest='en'):
-    translation = translator.translate(text, dest=dest)
-    return translation.text, translation.src, translation.dest
+def translate_subtitles(subtitles, target='en'):
+    translator = GoogleTranslator(source='auto', target=target)
+    for sub in subtitles:
+        sub['text'] = translator.translate(sub['text']) 
+    return subtitles
