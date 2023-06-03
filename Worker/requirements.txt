@@ -10,5 +10,6 @@ numpy==1.23.5
 git+https://github.com/linto-ai/whisper-timestamped
 torch==2.0.1
 moviepy==1.0.3
-python-multipart
+opencv-python==4.7.0.72
+python-multipart==0.0.6
 # torchvision==0.15.1
