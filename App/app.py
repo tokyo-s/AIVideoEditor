@@ -18,7 +18,6 @@ log.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level='INFO')
 
 @app.route("/", methods=['GET'])
 def home():
-    print(request)
     log.info(str(request))
     return render_template("index.html")
 
@@ -28,7 +27,6 @@ def video_editing():
 
 @app.route("/apply", methods=['POST'])
 def apply():
-    print(request)
     response_data = {'status': 'ok'}
     return response_data
 

@@ -4,51 +4,522 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script src="/static/js/scripts.js" defer></script>
     <title>AI Video Editing - Edit</title>
+    <style>
+         .video-container {
+            position: relative;
+            width: 100%;
+            /* max-width: 640px; */
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 1rem;
+            /* background-color: #f1f1f1; */
+            border-radius: 10px;
+            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 1.5rem;
+        }
+
+        #video-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 40px;
+        }
+        body {
+            font-family: 'ClashDisplay-Variable', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: hsla(232, 73%, 65%, 1);
+            background: linear-gradient(90deg, #6576e7 0%, #8752a3 100%);
+            background: -moz-linear-gradient(90deg, hsla(232, 73%, 65%, 1) 0%, hsla(279, 33%, 48%, 1) 100%);
+
+            background: -webkit-linear-gradient(90deg, hsla(232, 73%, 65%, 1) 0%, hsla(279, 33%, 48%, 1) 100%);
+
+            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#6274E7", endColorstr="#8752A3", GradientType=1 );
+        }
+
+
+
+
+        header {
+            position: relative;
+
+            background-color: #02182B;
+            /* border-radius: 5px; */
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+            color: #dce0d9;
+            /* padding: 1rem; */
+            text-align: center;
+            margin: 0;
+            margin-bottom: 0;
+
+        }
+
+
+        main {
+            margin-top: 0;
+            display: flex;
+            margin: 2rem;
+            margin-top: 0;
+        }
+
+        aside {
+            /* background-color: rgba(255, 255, 255, 0.9); */
+            border-radius: 5px;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+            flex: 0 0 30%;
+            height: calc(100vh - 4rem);
+            overflow-y: auto;
+            padding: 1rem;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .menu-item {
+            position: relative;
+            z-index: 100000;
+            font-family: "ClashDisplay-Variable-small";
+            background-color: white;
+            /* border: none; */
+            border-radius: 15px;
+            color: #6b6fd9;
+            cursor: pointer;
+            display: block;
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            text-align: left;
+            width: 80%;
+        }
+
+        .submenu {
+            width: 75%;
+            color: white;
+            background-color: transparent;
+            border: white 1px solid;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.5rem;
+            margin-top: -4.1rem;
+            padding: 0.5rem;
+            padding-top: 4.1rem;
+
+            position: relative;
+            display: none;
+        }
+        .submenu label {
+            font-family:"ClashDisplay-Variable-small" ;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            font-size: 1.3rem;
+        }
+        input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+        section {
+            /* background-color: rgba(255, 255, 255, 0.9); */
+            border-radius: 5px;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+            flex: 1;
+            margin-left: 2rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        #video-input {
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        #apply-changes {
+            background-color: #02182b;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: white;
+            cursor: pointer;
+            font-size: 1.7rem;
+            padding: 0.5rem 1rem;
+        }
+        ul li::marker {
+        content: ""; /*▶*/
+        }
+
+        .triangle {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            margin-left: 5px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid #6b6fd9;
+            transition: transform 0.3s;
+        }
+
+        .menu-item.expanded .triangle {
+    transform: rotate(90deg);
+}
+
+        #toggle-result {
+            background-color: #417b5a;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+        }
+
+        #result-message {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-button {
+            background-color: #02182b;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: white;
+            cursor: pointer;
+            font-size: 1.7rem;
+            padding: 0.5rem 1rem;
+            text-align: center;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        #result{
+            margin-top: 40px;
+            height: 200px;
+            background-color: white; 
+            padding: 1rem;
+            border-radius: 15px;
+        }
+
+
+
+        #sparkles {
+            /* left: 85%; */
+            /* position: absolute; */
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain the aspect ratio */
+            display: inline-block; /* Center the image */
+            /* margin: 0 1rem; */
+            /* margin-left: auto; */
+            /* margin-right: auto; */
+            margin-bottom: 0rem; /* Add some space below the image */
+        }
+
+        #cast {
+
+            width: 250px;
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            z-index: 110000;
+            /* left: 85%; */
+            /* position: absolute; */
+            height: auto; /* Maintain the aspect ratio */
+            display: inline-block; /* Center the image */
+            /* margin: 0 1rem; */
+            /* margin-left: auto; */
+            /* margin-right: auto; */
+            margin-bottom: 0rem; /* Add some space below the image */
+        }
+        #cut {
+            /* left: 85%; */
+            /* position: absolute; */
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain the aspect ratio */
+            display: inline-block; /* Center the image */
+            /* margin: 0 1rem; */
+            /* margin-left: auto; */
+            /* margin-right: auto; */
+            margin-bottom: 0rem; /* Add some space below the image */
+        }
+
+        #sparkle-header{
+            font-size: 7rem;
+            /* margin-top: 0; */
+        } 
+
+        .header-content {
+            /* position: absolute; */
+            /* top: 10%; */
+            /* left: 35%; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: nowrap;
+            margin-left: 13rem;
+
+        }
+
+        .header-content h1 {
+            color: white;
+            display: inline;
+            width: 600px;
+            font-size: 2.5rem;
+            margin-bottom: 0rem;
+            /* margin: auto */
+            /*text-align: center;
+            margin: auto; */
+        }
+
+
+        /* header h1 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            color: #fff;
+            z-index: 1;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        } */
+
+        nav {
+            background-color: #02182b;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        nav .logo {
+            width: 100px; /* Make the logo smaller */
+            height: auto;
+            margin-right: 1rem; /* Add space between the logo and the buttons */
+            margin-left: 2rem;
+        }
+
+        nav .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        nav .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav .menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        nav .auth-buttons {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            margin-left: auto;
+        }
+
+        nav .auth-buttons a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s;
+        }
+
+        nav .auth-buttons .sign-up {
+            background-color: #ffffff;
+            color: #02182b;
+            border-radius: 50px; /* Create an ellipse background */
+        }
+
+        nav .auth-buttons .sign-up:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        nav .menu #edit {
+            color: #A365E3; /* Set the link text color */
+            /* ... */
+        }
+
+
+        svg {
+            display: block; /* To remove the gap between SVG and the main body */
+            margin-top: -120px;
+        }
+
+        .rotate90 {
+            -webkit-transform: rotate(-15deg);
+            -moz-transform: rotate(-15deg);
+            -o-transform: rotate(-15deg);
+            -ms-transform: rotate(-15deg);
+            transform: rotate(-15deg);
+        }
+
+        .box{
+            z-index: 19999;
+        }
+    </style>
 </head>
 <body>
+    <nav>
+        <a href="/">
+            <img class="logo" src="static/logo.png" alt="Logo">
+        </a>
+        <div class="menu">
+            <a href="/">Home</a>
+            <a id ="edit" onclick="goVideoEditing()" >Edit Video</a>
+            <a href="#">Features</a>
+            <a href="#">Partners</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="#" class="log-in">Log in</a>
+            <a href="#" class="sign-up">Sign up</a>
+        </div>
+    </nav>
     <header>
-        <h1>Edit Your Video</h1>
+        <div class="header-content">
+            <img id="cast" class="rotate90" src="/static/cast3.png">
+        </div>
+        <div class="header-content">
+            <h1 id='sparkle-header'>Edit Video:</h1>
+        </div>
+        <p style="color:#A365E3; font-size: 1.5rem; margin-top: 0; margin-left: 13rem;">From triming to adding text and unique features!</p>
+
     </header>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240">
+        <path fill="#02182b" transform="rotate(180, 720, 160)" fill-opacity="1" 
+         d="M0,96L48,106.7C96,117,192,139,288,138.7C384,139,480,107,576,112C672,117,768,171,864,181.3C960,192,1056,160,1152,138.7C1248,117,1344,107,2392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,400,320L0,320Z"></path>
+    </svg>
     <main>
         <aside>
-            <ul id="editing-options">
+            <ul id="editing-options" >
                 <li>
-                    <button class="menu-item">Trim</button>
-                    <div class="submenu" hidden>
-                        <label><input type="checkbox" class="trim-option box" name="trim_start"> Trim start</label><br>
+                    <button class="menu-item" >
+                        <span class="triangle"></span>
+                        Add Text
+                    </button>
+                    <div class="submenu">
+                        <label><input type="checkbox" class="text-option box" name="add_subtitles"> Add subtitles</label>
+                        <label><input type="checkbox" class="text-option box" name="translate_subtitles"> Translate Subtitles</label>
+                    </div>
+                </li>
+                <li>
+                    <button class="menu-item">
+                        <span class="triangle"></span>
+                        Trim
+                    </button>
+                    <div class="submenu">
+                        <label><input type="checkbox" class="trim-option box" name="trim_start"> Trim start</label>
                         <label><input type="checkbox" class="trim-option box" name="trim_end"> Trim end</label>
                     </div>
                 </li>
                 <li>
-                    <button class="menu-item">Add Text</button>
-                    <div class="submenu" hidden>
-                        <label><input type="checkbox" class="text-option box" name="add_title"> Add title</label><br>
-                        <label><input type="checkbox" class="text-option box" name="add_subtitles"> Add subtitles</label>
+                    <button class="menu-item">
+                        <span class="triangle"></span>
+                        Summarize
+                    </button>
+                    <div class="submenu">
+                        <label><input type="checkbox" class="summarize-option box" name="summarize"> Summarize</label>
+                        <label><input type="checkbox" class="summarize-option box" name="news_letter"> Create News Letter</label>
                     </div>
                 </li>
                 <li>
-                    <button class="menu-item">Apply Filters</button>
-                    <div class="submenu" hidden>
-                        <label><input type="checkbox" class="filter-option box" name="black_and_white"> Black and white</label><br>
-                        <label><input type="checkbox" class="filter-option box" name="sepia"> Sepia</label>
+                    <button class="menu-item">
+                        <span class="triangle"></span>
+                        Apply Filters
+                    </button>
+                    <div class="submenu">
+                        <label><input type="checkbox" class="filter-option box" name="blur_faces"> Blur Faces</label>
+                        <label><input type="checkbox" class="filter-option box" name="blur_license_plates"> Blur License Plates</label>
+                    </div>
+                </li>
+                <li>
+                    <button class="menu-item">
+                        <span class="triangle"></span>
+                        Audio
+                    </button>
+                    <div class="submenu">
+                        <label><input type="checkbox" class="audio-option box" name="audio_clean"> Clean Audio</label>
                     </div>
                 </li>
             </ul>
         </aside>
         <section>
-            <input type="file" id="video-input" accept="video/*">
-            <video id="video-preview" controls></video>
-            <button  type="submit" id="apply-changes">Apply Changes</button>
-        </section>
-        <section>
-            <h2>Result</h2>
-            <button id="toggle-result">Toggle Result</button>
-            <div id="result-message" hidden>
+
+            <div class="video-container">
+                <video id="video-preview" controls></video>
+                <span id="video-placeholder">No video uploaded</span>
+            </div>
+            <div class="buttons-container">
+                <div class="file-upload-wrapper">
+                    <input type="file" id="video-input" accept="video/*">
+                    <button class="file-upload-button" style="font-family: ClashDisplay-Variable-small;">Upload Video</button>
+                </div>
+                <button type="submit" id="apply-changes"  style="font-family: ClashDisplay-Variable-small;">Apply Changes</button>
+            </div>
+            <!-- <button id="toggle-result">Toggle Result</button> -->
+            <div id="result">
+                <h1 style="font-family: ClashDisplay-Variable;">Results:</h1>
                 <p id="result-text"></p>
             </div>
         </section>
+
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(function(menuItem) {
+                menuItem.addEventListener('click', function() {
+                    const submenu = this.nextElementSibling;
+                    const displayStyle = window.getComputedStyle(submenu).display;
+                    submenu.style.display = displayStyle === 'none' ? 'block' : 'none';
+                    this.classList.toggle('expanded');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

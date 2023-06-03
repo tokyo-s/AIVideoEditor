@@ -35,22 +35,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updatePageWithResults(result) {
       const resultMessage = document.getElementById('result-text');
-      resultMessage.textContent = `Result: ${JSON.stringify(result['result'])}`;
+      if (result['result']['summarized_text'] != null){
+      resultMessage.innerHTML = `<b>Summary</b>: ${JSON.stringify(result['result']['summarized_text'])}`;
+      }
+
       resultMessage.hidden = false;
+      const video = document.getElementById('video-preview');
+      video.src = result['video_url'];
   }
 
     const trimOptions = document.querySelectorAll(".trim-option");
     const textOptions = document.querySelectorAll(".text-option");
     const filterOptions = document.querySelectorAll(".filter-option");
+    const summarizeOptions = document.querySelectorAll(".summarize-option");
+    const audioOptions = document.querySelectorAll(".audio-option");
+
 
     const formData = new FormData();
     formData.append("video", videoInput.files[0]);
     formData.append("trim_start", trimOptions[0].checked);
     formData.append("trim_end", trimOptions[1].checked);
-    formData.append("add_title", textOptions[0].checked);
-    formData.append("add_subtitles", textOptions[1].checked);
-    formData.append("black_and_white", filterOptions[0].checked);
-    formData.append("sepia", filterOptions[1].checked);
+    formData.append("add_subtitles", textOptions[0].checked);
+    formData.append("translate_subtitles", textOptions[1].checked);
+    formData.append("summarize", summarizeOptions[0].checked);
+    formData.append("news_letter", summarizeOptions[1].checked);
+    formData.append("blur_faces", filterOptions[0].checked);
+    formData.append("blur_license_plates", filterOptions[1].checked);
+    formData.append("audio_clean", audioOptions[0].checked);
+
     
     try {
       const response = await fetch("http://localhost:8001/request", {
@@ -60,8 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
-        updatePageWithResults(result);
+        updatePageWithResults(result, videoInput.files[0].fil);
       } else {
         console.error("Error:", response.statusText);
       }
