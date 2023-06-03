@@ -1,4 +1,4 @@
-# SmartEditor
+# AIVideoEditor
 heh, my thesis
 lol
 
