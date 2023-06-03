@@ -26,9 +26,10 @@ The video editing app is a web application that will allow users to select with 
 
 3. Replace the path with the correct path to your `magick.exe` file inside the `config.py`.
 
+## Change config.py file
 
-### Create a OpenAI Account on https://platform.openai.com and create a new API key
-### create a config.py file in your folder and place the following line there:
+### 1. Create a OpenAI Account on https://platform.openai.com and create a new API key
+### 2. add your API key to the Worker/config.py file
 ```python
-api_key = 'your_api_key'
+OPEN_API_KEY = 'YOUR_API_KEY'
 ```
