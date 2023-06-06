@@ -31,7 +31,7 @@ def find_workers_to_process():
     response = json.loads(response.text)
     workers = response['workers']
     free_workers = [key for key in workers.keys()]
-    log.info("Found {} workers".format(len(response['workers'])))
+    log.info(f"Found {len(response['workers'])} workers, {free_workers}")
     return
 
 @app.route("/request", methods=['POST'])
@@ -46,13 +46,13 @@ def apply_changes():
     form_data = dict(form_data)
     form_data['filename_video'] = save_file_path
 
-    # extract_audio(save_file_path) #TODO
+    extract_audio(save_file_path)
     form_data['filename_audio'] = save_file_path.replace('.mp4', '.mp3')
 
     # Finding all Free workers
     find_workers_to_process()
     worker_name = random.choice(free_workers) 
-    # free_workers.remove(worker_name) #TODO
+    free_workers.remove(worker_name)
     worker = workers[worker_name]
 
     log.info(f"Sending request to {worker_name}: {worker}")

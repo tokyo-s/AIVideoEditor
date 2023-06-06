@@ -10,12 +10,12 @@ def trim_video(input_video, start_time = 5, end_time = 15):
 
     # Save the trimmed video to a new file
     if '_result' not in input_video:
-        output_video = input_video.replace('.mp4', '_result.mp4')
+        output_video = input_video.replace('.mp4', '_result.mp4').replace('files','App/static')
     else:
-        output_video = input_video
+        output_video = input_video.replace('result', 'trimmed')
     trimmed_video.write_videofile(output_video)
 
     # Close the clips to release video files (Optional)
     video.close()
     trimmed_video.close()
-    return True
+    return output_video

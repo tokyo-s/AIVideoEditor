@@ -73,5 +73,5 @@ def add_subtitles_on_video(text, filename_video):
     subtitles = to_srt(lines)
     subtitles = subtitles.splitlines(True)
 
-    combine_subtitles_on_video(subtitles, filename_video)
+    return combine_subtitles_on_video(subtitles, filename_video)
 
