@@ -5,7 +5,6 @@ import requests
 import threading
 import logging as log
 
-from config import *
 from scripts.models import *
 from scripts.env_vars import *
 

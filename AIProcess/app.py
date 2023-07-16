@@ -1,3 +1,4 @@
+from genericpath import isdir
 from flask import Flask, request
 from flask_cors import CORS
 import requests
@@ -9,7 +10,6 @@ import os
 
 from scripts.extract_audio import extract_audio
 from scripts.env_vars import *
-from config import *
 
 env_vars = None
 workers = None
@@ -41,13 +41,15 @@ def apply_changes():
     form_data = request.form
     log.info("Processing request with following options: {}".format(form_data))
     file = request.files['video']
+    if not os.path.isdir(upload_folder):
+        os.mkdir(upload_folder)
     save_file_path = os.path.join(upload_folder, file.filename)
     file.save(save_file_path)
     form_data = dict(form_data)
     form_data['filename_video'] = save_file_path
 
-    extract_audio(save_file_path)
-    form_data['filename_audio'] = save_file_path.replace('.mp4', '.mp3')
+    audio_file_name = extract_audio(save_file_path)
+    form_data['filename_audio'] = audio_file_name
 
     # Finding all Free workers
     find_workers_to_process()

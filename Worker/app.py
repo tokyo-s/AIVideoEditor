@@ -28,7 +28,8 @@ def register_worker():
     worker_port = env_vars[WORKER_PORT]
 
     log.info(f'Registering worker at {worker_address}:{worker_port}')
-    response = requests.post(f"http://{discovery_host}:{discovery_port}/register", params={"name": worker_name, "address": worker_address, 'port': worker_port})
+    response = requests.post(f"http://{discovery_host}:{discovery_port}/register", 
+        params={"name": worker_name, "address": worker_address, 'port': worker_port})
     response = json.loads(response.text)
     log.info(f'Discovery Service: {response["message"]}')
     return
@@ -61,9 +62,10 @@ if __name__ == '__main__':
     parser.add_argument('--port', type=str, required=False)
     parser.add_argument('--name', type=str, required=False)
 
-    args = parser.parse_args()
-    os.environ["WORKER_NAME"] = args.name
-    os.environ["WORKER_PORT"] = args.port
+    # Uncomment this line if you want to run the app from terminal with multiple instances
+    # args = parser.parse_args()
+    # os.environ["WORKER_NAME"] = args.name
+    # os.environ["WORKER_PORT"] = args.port
     
     env_vars = EnvironmentVariables()
     print(env_vars[WORKER_ADDRESS], env_vars[WORKER_PORT])
